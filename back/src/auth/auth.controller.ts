@@ -1,13 +1,16 @@
 import { SigninAuthDto } from './dto/signin-auth.dto';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-  @Post('signin')
-  signin(@Body() body:SigninAuthDto){
-    return this.authService.signin(body.email, body.password)
+
+  @Post('login')
+  @UseGuards(LocalAuthGuard)
+  login(@Req() req:any){
+    return this.authService.login(req.user.id, req.user.email)
   }
 
   @Get('refresh')
