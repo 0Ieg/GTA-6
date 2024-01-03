@@ -1,20 +1,53 @@
 version: '3'
 services:
-  front:
+  frontend:
     build: /front
     container_name: front
     ports:
-      - '8080:80'
-  back:
+      - '8000:80'
+    depends_on:
+      - database
+      - backend
+    networks:
+      - localnet
+      - internet
+
+  backend:
     build: /back
     container_name: back
     ports:
-      - '4000:40'
+      - '3000:3000'
+    env_file:
+      - .env
     depends_on:
-      - db
-  db:
+      - database
+    networks:
+      - localnet
+
+  database:
     image: postgres
     container_name: db
+    restart: always
+    networks:
+      - localnet
     ports:
-      -"5432:5432"
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - localnet
+    ports:
+      - 8080:8080
+
+networks:
+  localnet:
+    name: localnet
+    driver: bridge
+  internet:
+    name: internet
+    driver: bridge
 

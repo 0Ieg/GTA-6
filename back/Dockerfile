@@ -1,5 +1,15 @@
-FROM node
+FROM node as builder
 WORKDIR /app
+COPY package*.json .
+COPY prisma ./prisma/
+RUN npm install --only-prod
 COPY . .
-EXPOSE 40
-CMD [ "npm","run","start:dev" ]
+RUN npm run build
+
+FROM node
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 3000
+CMD [ "npm","run","start:prod" ]
