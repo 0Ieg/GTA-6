@@ -17,3 +17,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return { id: payload.sub, email: payload.email };
   }
 }
+
+export type JWTReqType = {
+  user:{
+    id:string,
+    email:string
+  }
+}
