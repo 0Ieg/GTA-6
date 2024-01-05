@@ -7,7 +7,7 @@ const Styled = styled.main`
 export const Main:FC = ()=>{
   return (
     <Styled>
-      Main
+      Main Main
     </Styled>
   )
 }

@@ -38,6 +38,11 @@ export class UsersService {
   async update(id: string, body: UpdateUserDto) {
     const user = await this.findOneById(id)
     if(!user)throw new BadRequestException('The user was not found')
-    return await this.prismaService.user.update({where:{id}, data:{...body}})
+    const filtered = await this.filtered(body, 'role')
+    return await this.prismaService.user.update({where:{id}, data:{...filtered}})
+  }
+  async filtered(body:any, key:string){
+    delete body?.[key]
+    return body
   }
 }

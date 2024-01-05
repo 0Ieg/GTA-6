@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JWTReqType } from 'src/auth/strategies/jwt.strategy';
+import { DeleteUserDTO } from './dto/delete-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -27,8 +28,8 @@ export class UsersController {
 
   @Delete()
   @UseGuards(JwtAuthGuard)
-  remove(@Req() req:JWTReqType, @Body() password:string) {
-    return this.usersService.remove(req.user.id, password);
+  remove(@Req() req:JWTReqType, @Body() body:DeleteUserDTO) {
+    return this.usersService.remove(req.user.id, body.password);
   }
 
   @Patch()
