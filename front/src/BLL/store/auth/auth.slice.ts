@@ -8,8 +8,8 @@ const slice = createSlice({
   name:'auth',
   initialState,
   reducers:{
-    LOGIN:(state, action:{payload:{id:string}})=>{
-      return state = {isAuth:true, id:action.payload.id}
+    LOGIN:(state, action)=>{
+      return state = {isAuth:true, id:action.payload}
     },
     LOGOUT:(state)=>{
       return state = {isAuth:false, id:''}

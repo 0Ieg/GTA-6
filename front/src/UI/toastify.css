@@ -1,0 +1,7 @@
+:root{
+  --toastify-color-dark: var(--color-background-dark);
+  --toastify-color-success: var(--color-green);
+  /* --toastify-color-error:#e74c3c;  */
+  --toastify-color-error:var(--color-red); 
+  --toastify-text-color-dark: var(--color-gray-light);
+}
