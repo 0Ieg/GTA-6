@@ -3,20 +3,24 @@ import styled from 'styled-components';
 import { Header } from './header/header';
 import { Main } from './main/main';
 import { Footer } from './footer/footer';
-import { ToastContainer } from 'react-toastify';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './toastify.css'
+import { BrowserRouter as Router} from 'react-router-dom'
 
 const Styled = styled.div`
   
 `
-export const App:FC = ()=>{
+export const App: FC = () => {
   return (
-    <Styled>
-      <Header/>
-      <Main/>
-      <Footer/>
-      <ToastContainer/>
-    </Styled>
+    <Router>
+      <Styled>
+        <Header />
+        <Main />
+        <Footer />
+      </Styled>
+      <ToastContainer position="bottom-left" transition={Slide} autoClose={2000} theme="dark" />
+    </Router>
   )
 }
 

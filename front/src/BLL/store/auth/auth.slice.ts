@@ -13,9 +13,12 @@ const slice = createSlice({
     },
     LOGOUT:(state)=>{
       return state = {isAuth:false, id:''}
+    },
+    SIGNUP:(state, action)=>{
+      return state = {isAuth:true, id:action.payload}
     }
   }
 })
 
 export const authReducer = slice.reducer
-export const {LOGIN, LOGOUT} = slice.actions
+export const {LOGIN, LOGOUT, SIGNUP} = slice.actions
