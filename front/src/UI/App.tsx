@@ -9,7 +9,9 @@ import './toastify.css'
 import { BrowserRouter as Router} from 'react-router-dom'
 
 const Styled = styled.div`
-  
+min-height: 100dvh;
+display: flex;
+flex-direction: column;
 `
 export const App: FC = () => {
   return (

@@ -7,10 +7,12 @@ html,body{height: 100%;}
 /* -------------------------------------- ROOT */
 :root{
 /*Sizes*/
-  --index: calc(1vw + 1vh);
-  --margin-big: calc(var(--index)*3);
-  --margin-middle: calc(var(--index)*2);
-  --margin-small: calc(var(--index)*1);
+--index: calc(1vw + 1vh);
+--margin-big: 50px;
+--margin-middle: 15px;
+--margin-small: 10px;
+--borrad-big: 10px;
+--borrad-small: 5px;
 /*Colors*/
   --color-black: #000;
   --color-white: #fff;
