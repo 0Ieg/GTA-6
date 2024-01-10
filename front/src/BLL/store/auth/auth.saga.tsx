@@ -11,10 +11,10 @@ export const loginAsyncAC = createAction<LoginAuthDTO>("LOGIN_ASYNC")
 export const logoutAsyncAC = createAction("LOGOUT_ASYNC")
 
 export function* AuthWatcher():Generator{
-  takeEvery("", ProfileWorker)
-  takeEvery("SIGNUP_ASYNC", SignupWorker)
-  takeEvery("LOGIN_ASYNC", LoginWorker)
-  takeEvery("LOGOUT_ASYNC", LogoutWorker)
+  yield takeEvery("PROFILE_ASYNC", ProfileWorker)
+  yield takeEvery("SIGNUP_ASYNC", SignupWorker)
+  yield takeEvery("LOGIN_ASYNC", LoginWorker)
+  yield takeEvery("LOGOUT_ASYNC", LogoutWorker)
 }
 
 function* ProfileWorker():Generator{
@@ -25,6 +25,7 @@ function* SignupWorker(action:ReturnType<typeof signupAsyncAC>):Generator{
   if(id)yield put(SIGNUP(id))
 }
 function* LoginWorker(action:ReturnType<typeof loginAsyncAC>):Generator{
+  yield console.log('login worker')
   const id = yield call(loginAPI, action.payload)
   if(id)yield put(LOGIN(id))
 }

@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 import { SignupAuthDTO } from "./dto/signup-auth.dto";
 
 export const loginAPI = (data:LoginAuthDTO)=>{
+  console.log('login')
   return(
     instance.post('auth/login', data)
     .then(res=>{
@@ -11,7 +12,7 @@ export const loginAPI = (data:LoginAuthDTO)=>{
       toast.success('Successful login',{})
       return res.data.id
     })
-    .catch(error=>toast.error(error.response?.data.message))
+    .catch(error=>{toast.error(error.response?.data.message)})
   )
 }
 export const logoutAPI = ()=>{
@@ -22,7 +23,7 @@ export const logoutAPI = ()=>{
       toast.success('Successful logout')
       return true
     })
-    .catch(error=>toast.error(error.response?.data.message))
+    .catch(error=>{toast.error(error.response?.data.message)})
   )
 }
 export const signupAPI = (data:SignupAuthDTO)=>{
@@ -33,6 +34,6 @@ export const signupAPI = (data:SignupAuthDTO)=>{
       toast.success('Successful signup')
       return true
     })
-    .catch(error=>toast.error(error.response?.data.message))
+    .catch(error=>{toast.error(error.response?.data.message)})
   )
 }

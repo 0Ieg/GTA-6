@@ -6,13 +6,12 @@ import { AuthWatcher } from "./auth/auth.saga";
 
 
 const sagaMiddleware = createSagaMiddleware()
-const middleware = [sagaMiddleware]
 export const store = configureStore({
   reducer:{
     auth:authReducer,
   },
   middleware: (getDefaultMiddleware)=>
-    getDefaultMiddleware().concat(middleware)
+    getDefaultMiddleware().concat([sagaMiddleware])
 })
 
 

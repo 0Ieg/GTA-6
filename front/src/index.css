@@ -8,11 +8,15 @@ html,body{height: 100%;}
 :root{
 /*Sizes*/
 --index: calc(1vw + 1vh);
---margin-big: 50px;
---margin-middle: 15px;
---margin-small: 10px;
---borrad-big: 10px;
---borrad-small: 5px;
+
+--m-xl: 50px;
+--m-l: 15px;
+--m-m: 10px;
+--m-s: 5px;
+
+--br-m: 10px;
+--br-s: 5px;
+
 /*Colors*/
   --color-black: #000;
   --color-white: #fff;
