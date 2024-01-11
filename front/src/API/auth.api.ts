@@ -2,6 +2,7 @@ import { instance } from "./instance";
 import { LoginAuthDTO } from "./dto/login-auth.dto";
 import { toast } from "react-toastify"
 import { SignupAuthDTO } from "./dto/signup-auth.dto";
+import { LogoutAuthDTO } from "./dto/logout-auth.dto";
 
 export const loginAPI = (data:LoginAuthDTO)=>{
   console.log('login')
@@ -15,7 +16,7 @@ export const loginAPI = (data:LoginAuthDTO)=>{
     .catch(error=>{toast.error(error.response?.data.message)})
   )
 }
-export const logoutAPI = ()=>{
+export const logoutAPI = (data:LogoutAuthDTO)=>{
   return(
     instance.delete('auth/logout')
     .then(resp=>{
