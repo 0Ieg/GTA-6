@@ -5,9 +5,11 @@ import { Auth } from './auth/auth';
 import { Logout } from './auth/logout';
 import { Home } from './home/home';
 
+
 const Styled = styled.main`
 flex-grow: 1;
 display: grid;
+
 `
 export const Main:FC = ()=>{
   return (
