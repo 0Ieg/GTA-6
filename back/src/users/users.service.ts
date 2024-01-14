@@ -1,3 +1,4 @@
+import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from './../prisma/prisma.service';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -5,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService:PrismaService){}
+  constructor(private readonly prismaService:PrismaService, private readonly jwtService:JwtService){}
   private async hashingPassword(password:string){
     return bcrypt.hash(password, bcrypt.genSaltSync(11))
   }
@@ -23,9 +24,11 @@ export class UsersService {
   }
   async create(email:string, password:string) {
     const user = await this.findOneByEmail(email)
-    if(user) throw new BadRequestException('This email is already in use')
+    if(user)throw new BadRequestException('This email is already in use')
     const hashedPassword = await this.hashingPassword(password)
-    return await this.prismaService.user.create({data:{email, password:hashedPassword, role:'guest'}})
+    const newUser = await this.prismaService.user.create({data:{email, password:hashedPassword, role:'guest'}})
+    const access_token = await this.jwtService.signAsync({sub:newUser.id, email:newUser.email})
+    return {newUser, access_token}
   }
   async remove(id:string, password:string) {
     const user = await this.findOneById(id)
@@ -40,6 +43,9 @@ export class UsersService {
     if(!user)throw new BadRequestException('The user was not found')
     const filtered = await this.filtered(body, 'role')
     return await this.prismaService.user.update({where:{id}, data:{...filtered}})
+  }
+  async clearTokens(id:string) {
+    // const cleared = await this.prismaService.token.delete()
   }
   async filtered(body:any, key:string){
     delete body?.[key]

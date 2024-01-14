@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { GlobalJWTModule } from './global/jwt.module';
+import { TokensModule } from './tokens/tokens.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { GlobalJWTModule } from './global/jwt.module';
     GlobalJWTModule,
     UsersModule,
     AuthModule,
+    TokensModule,
   ],
   controllers: [AppController],
   providers: [AppService],
